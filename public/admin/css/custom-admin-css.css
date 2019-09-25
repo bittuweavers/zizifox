@@ -1,0 +1,44 @@
+.event-setting-approve {
+    text-align: right;
+}
+.event-setting-approve p {
+    display: inline-block;
+    background: #21275d;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.event-setting-approve p input {
+    display: inline-block;
+    vertical-align: text-top;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.event-setting-approve p label {
+    color: #fff;
+}
+
+div#DataTables_Table_0_length {
+    padding-left: 10px;
+}
+.dt-buttons {
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+.evnt-showcase ul {
+    margin: 0 0 15px;
+    padding: 0;
+    list-style: none;
+    font-size: 15px;
+}
+
+ul.checked-user li {
+    display: inline-block;
+    vertical-align: top;
+}
+ul.checked-user li a {
+    display: block;
+    background: #00bfa5;
+    color: #fff;
+    padding: 7px 15px;
+    border-radius: 30px !important;
+}

@@ -1,0 +1,186 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    border: 0 none;
+    font-family: 'Lato', sans-serif;
+    font-size: 100%;
+    font-style: inherit;
+    font-weight: inherit;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+body {
+    color: #333333;
+    font-family: 'Lato', sans-serif;
+}
+img {
+	max-width: 100%;
+}
+.main_section .contant_wrap {}
+
+.main_section .contant_wrap .logo_sec {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.main_section .contant_wrap .logo_sec img {
+    width: 175px;
+}
+
+.main_section .contant_wrap .search_sec {
+    padding: 20px 20px;
+    border: 1px solid #c7c7c7;
+    margin: 50px 0;
+    overflow: hidden;
+    border-radius: 5px;
+}
+.main_section .contant_wrap .search_sec p {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 700;
+}
+.main_section .contant_wrap .search_sec select {
+    display: inline-block;
+}
+
+.main_section .contant_wrap .search_sec input.s-input.js-search-field {
+    display: block;
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 5px;
+    border: 1px solid #b9b9b9;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.main_section .contant_wrap .search_sec a.search_btn {
+    display: block;
+    margin-top: 20px;
+    width: 100%;
+    float: right;
+    max-width: 117px;
+    text-align: center;
+    background: #00a5d8;
+    color: #FFF;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 300;
+}
+.main_section .contant_wrap .search_sec select {
+    display: inline-block;
+    float: right;
+    padding: 5px;
+    border-radius: 5px;
+}
+.main_section .contant_wrap .footer_sec {
+    text-align: center;
+    margin: 50px 0;
+}
+.main_section .contant_wrap .contant_sec p {
+    font-size: 18px;
+    line-height: 28px;
+    color: #555;
+}
+.main_section .left_img_sec img {
+    width: 100%;
+}
+.main_section .right_img_sec img {
+    width: 100%;
+}
+
+/* Start Details Page */
+.details_section {
+    padding: 80px 0;
+}
+.details_section .details_wrap .logo_sec img {
+    width: 100%;
+}
+.details_section .details_wrap .search_wrap p {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 700;
+}
+.details_section .details_wrap .search_wrap select {
+    display: inline-block;
+    float: right;
+    padding: 5px;
+    border-radius: 5px;
+}
+.details_section .details_wrap .search_wrap {
+    padding: 20px 20px;
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
+}
+.details_section .details_wrap .search_wrap input {
+    display: block;
+    width: 100%;
+    padding: 9px 5px;
+    border-radius: 5px;
+    border: 1px solid #b9b9b9;
+    margin-top: 20px;
+}
+.details_section .details_wrap .search_wrap input {
+    display: block;
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 5px;
+    border: 1px solid #b9b9b9;
+    margin-top: 20px;
+    font-size: 20px;
+}
+.details_section .details_wrap .search_wrap a.search_btn {
+    display: block;
+    margin-top: 20px;
+    width: 100%;
+    float: right;
+    max-width: 117px;
+    text-align: center;
+    background: #00a5d8;
+    color: #FFF;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 300;
+}
+.details_section .details_wrap .bottom_sec .heading_sec {
+    border: 1px solid #c7c7c7;
+    padding: 9px 13px;
+    margin: 25px 0 10px;
+    font-size: 18px;
+    width: 100%;
+    max-width: 438px;
+}
+.details_section .details_wrap .bottom_sec h3 {
+    width: 100%;
+    text-align: center;
+    border: 1px solid #c7c7c7;
+    padding: 22px 0;
+    font-size: 25px;
+}
+.details_section .details_wrap .bottom_sec .button_sec {
+    margin: 10px 0;
+}
+.details_section .details_wrap .bottom_sec .button_sec a {
+    background: #00a5d8;
+    color: #FFF;
+    text-align: center;
+    padding: 5px 18px;
+    border-radius: 5px;
+    font-size: 15px;
+	display: inline-block;
+}
+.details_section .details_wrap .bottom_sec .button_sec {
+    margin: 10px 0;
+    background: #efefef;
+    padding: 12px 10px;
+}
+.details_section .details_wrap .bottom_sec .button_sec a:hover {
+    background: #0197c5;
+}
