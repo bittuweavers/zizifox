@@ -28,33 +28,8 @@ class HomeController extends Controller
 
      public function index()
     {
-            $date = new \DateTime();
+      echo "1";die;
 
-        if(Session::get('ip_id')){
-           $ip_id=Session::get('ip_id');
-
-        }else{
-         $ip_add = $_SERVER['REMOTE_ADDR'];
-         $ip_add_count = IpAddress::where('ip_add',$ip_add)->first();
-         if(is_object($ip_add_count)){
-            $ip_id = $ip_add_count->id;
-            Session::put('ip_id', $ip_add_count->id);  
-         }else{
-             $ip_address = new IpAddress;
-             $ip_address->ip_add = $ip_add;
-             $ip_save = $ip_address->save();
-             $ip_id = $ip_address->id;
-              Session::put('ip_id', $ip_id); 
-            
-         }
-
-          }
-
-           $date->modify('-1 hours');
-          $formatted_date = $date->format('Y-m-d H:i:s');
-          $search_count =  SearchResult::where('ip_add_id',$ip_id)->where('search_date', '>',$formatted_date)->count();
-
-        return view('forntend.home')->with(compact('search_count'));
     }
 
     public function search(Request $request){

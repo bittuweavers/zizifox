@@ -48,7 +48,7 @@
 								@if($language->count()>0)
 								@foreach($language as $key=>$val)
 									
-									<option value="{{$val->lang_code}}">{{$val->lang_name}}</option>
+									<option value="{{$val->id}}">{{$val->lang_name}}</option>
 								@endforeach	
 								@else
 									<option value="us">US</option>			

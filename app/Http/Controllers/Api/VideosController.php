@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Helpers\JsonApiResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Video;
+use App\Models\Language;
 use App\Models\VideosCaption;
 use App\Models\Settings;
 use App\Helpers\Interfaces\ResponseCodesInterface;
@@ -65,10 +66,10 @@ class VideosController extends Controller implements ResponseCodesInterface
             
           }
 
-         $videos  = Video::select('id','yt_video_id','yt_video_name','yt_video_url','caption')->where('videos.language',$search_language)->where('videos.status',1)->whereRaw($where)->skip($offset)->take(1)->get();
+         $videos  = Video::select('id','yt_video_id','yt_video_name','yt_video_url','caption')->where('videos.languages_id',$search_language)->where('videos.status',1)->whereRaw($where)->skip($offset)->take(1)->get();
 
         if($videos->count()>0){
-        $next_video_id  = Video::select('id')->where('videos.language',$search_language)->where('videos.status',1)->whereRaw($where)->skip($offset+1)->take(1)->get();
+        $next_video_id  = Video::select('id')->where('videos.languages_id',$search_language)->where('videos.status',1)->whereRaw($where)->skip($offset+1)->take(1)->get();
         }else{
              $next_video_id ="";
         }
@@ -191,7 +192,26 @@ class VideosController extends Controller implements ResponseCodesInterface
 		
 	}
 
+  function get_language(Request $request){
+  $settings = new Settings();
+  $api_status =  $settings->getSettings('api-status');
+  if($api_status =='1'){
+   $token = $request->header('Authorization');
+   $api_token =  $settings->getSettings('api-token');
+  if($api_token==$token){
+    $language = Language::orderBy('id', 'Asc')->where('status','1')->get();
+       return response()->json(['isError' => 0,'errorCode' => 0,'language' => $language], 200);
+    }else{
+        $error = [
+        'token' => ['Authentication Error.']
+      ];
+      return $this->sendFailedResponse($error, 401);
+        }
+    }else{
+        return response()->json(['isError' => 1,'errorCode' => 404,'message' => "Api is disable"], 200);
+      }
 
+  }
 
 
 	

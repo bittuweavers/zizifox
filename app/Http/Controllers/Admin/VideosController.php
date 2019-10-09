@@ -152,27 +152,31 @@ class VideosController extends Controller
       $id =0;
       $lg_code=$lang_code_search;
       $create_name ="";
-
+$lg_code = 'aa';
       $video_lang = Curl::to('http://video.google.com/timedtext')->withData(array('type' => 'list','v'=>$youtube_id))->withContentType('text/xml')->returnResponseObject()->get();
+
         if($video_lang->status=='200'){
         $langxml=simplexml_load_string($video_lang->content);
+         print_r($video_lang);
       foreach ($langxml->track as $row1) {
-         $lang_code = $row1->attributes()->lang_code;
-        if($lang_code==$lang_code_search){
-          $id = $row1->attributes()->id;  
-          $lg_code =$lang_code_search;
-          $create_name = $row1->attributes()->name;
-            } 
+
+         $lang_code = (string)$row1->attributes()->lang_code;
+         $query = DB::table('languages')->whereRaw("FIND_IN_SET('".$lang_code."',lang_code)")->where('id',$lang_code_search)->pluck('id');
+
+         if($query->count() > 0){
+          $id = (string)$row1->attributes()->id;  
+          $lg_code = $lang_code;
+          $create_name = (string)$row1->attributes()->name;
+            }
           }
         }
 
-     
-     // echo $create_name;
+    
       $response_title = Curl::to('http://www.youtube.com/oembed')->withData(array('url' => $youtube_url,'format'=>'json'))->get();
 
       $res_array = json_decode($response_title, true);
 
-      
+ 
   		$response_video = Curl::to('http://video.google.com/timedtext')->withData(array('type' => 'track','v'=>$youtube_id,'id'=>$id,'lang'=>$lg_code,'name'=>"$create_name"))->withContentType('text/xml')->returnResponseObject()->get();
 
       $status = $response_video->status;
@@ -216,7 +220,7 @@ class VideosController extends Controller
           if($lang_code_search =='en'){
             $lang = 'us';
           }else{
-             $lang = $request->lang;
+             $lang =$lg_code;
           }
   			   $videos_creat = new Video;
   			   $videos_creat->yt_video_url =$youtube_url; 
@@ -224,6 +228,7 @@ class VideosController extends Controller
            $videos_creat->yt_video_name =$video_title;
             $videos_creat->language = $lang;
            $videos_creat->channels_id = $channel_id;
+           $videos_creat->languages_id =$lang_code_search;
            $videos_creat->status ='1';
            $videos_creat->caption =$captions;
   			    $save = $videos_creat->save();

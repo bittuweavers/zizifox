@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('videos/list', 'Api\VideosController@getVideosList');
 Route::post('videos/detail', 'Api\VideosController@getVideosDetail');
+Route::post('videos/language', 'Api\VideosController@get_language');
 Route::get('token', 'Api\AuthtokenController@gettoken');

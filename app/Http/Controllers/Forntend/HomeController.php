@@ -57,7 +57,7 @@ class HomeController extends Controller
           $search_count =  SearchResult::where('ip_add_id',$ip_id)->where('search_date', '>',$formatted_date)->count();
           $banner = Banner::inRandomOrder()->whereRaw("find_in_set('1',page_type)")->first();
 
-          $language = Language::orderBy('id', 'Asc')->get();
+          $language = Language::orderBy('id', 'Asc')->where('status','1')->get();
         return view('forntend.home')->with(compact('search_count','banner','language'));
     }
 
@@ -124,13 +124,13 @@ class HomeController extends Controller
             
           }
    
-       $videos  = Video::select('id','yt_video_id','caption')->where('videos.language',$search_language)->where('videos.status',1)->whereRaw($where)->skip($offset)->take(1)->get();
+       $videos  = Video::select('id','yt_video_id','caption')->where('videos.languages_id',$search_language)->where('videos.status',1)->whereRaw($where)->skip($offset)->take(1)->get();
   
        
-       $video_count  = Video::select('id')->where('videos.language',$search_language)->where('videos.status',1)->whereRaw($where)->count(); 
+       $video_count  = Video::select('id')->where('videos.languages_id',$search_language)->where('videos.status',1)->whereRaw($where)->count(); 
          if($videos->count()>0){
          
-         $next_video_id  = Video::select('id')->where('videos.language',$search_language)->where('videos.status',1)->whereRaw($where)->skip($offset+1)->take(1)->get();
+         $next_video_id  = Video::select('id')->where('videos.languages_id',$search_language)->where('videos.status',1)->whereRaw($where)->skip($offset+1)->take(1)->get();
                
         }else{
              $next_video_id ="";
@@ -181,7 +181,7 @@ class HomeController extends Controller
 
 
          $banner = Banner::inRandomOrder()->whereRaw("find_in_set('3',page_type)")->first();
-          $language = Language::orderBy('id', 'Asc')->get();
+          $language = Language::orderBy('id', 'Asc')->where('status','1')->get();
     	    return view('forntend.search')->with(compact('videos','search_text','next_video_id','page','video_count','search_count','banner','language'));
 
     
@@ -266,12 +266,12 @@ public function insert_caption(){
           }
           // $where = "caption Rlike '[[:<:]]". $search_text ."[[:>:]]'";
         
-      $videos  = Video::select('id','yt_video_id','caption')->where('videos.language',$search_language)->where('videos.status',1)->whereRaw($where)->skip($offset)->take(1)->get();
+      $videos  = Video::select('id','yt_video_id','caption')->where('videos.languages_id',$search_language)->where('videos.status',1)->whereRaw($where)->skip($offset)->take(1)->get();
 
 
         
          if($videos->count()>0){
-                $next_video_id  = Video::select('id')->where('videos.language',$search_language)->where('videos.status',1)->whereRaw($where)->skip($offset+1)->take(1)->get();
+                $next_video_id  = Video::select('id')->where('videos.languages_id',$search_language)->where('videos.status',1)->whereRaw($where)->skip($offset+1)->take(1)->get();
             //$next_video_id  = Video::select('id')->where('videos.language',$search_language)->where('videos.status',1)->whereRaw($where)->where('id','>',$videos[0]->id)->take(1)->pluck('id');
          
         
@@ -292,4 +292,18 @@ public function insert_caption(){
 
 
     }
+    public function update_video_langauages_id(Request $request){
+     $language = Videos::distinct()->get(['language']);
+     foreach ($language as $value){
+      $query = Language::whereRaw("FIND_IN_SET('".$value->language."',lang_code)")->pluck('id');
+     // print_r($query[0]);
+         if($query->count() > 0){
+
+          Videos::where("language",  $value->language)->update(['languages_id'=> $query[0]]);
+
+         }
+     }
+
+    }  
+    
 }

@@ -51,6 +51,7 @@
 															'route' => ['admin.languages.destroy', $val->id])) !!}
 															{!! Form::submit('Delete', array('class' => 'btn btn-xs btn-danger')) !!}
 														{!! Form::close() !!}
+														<a class="btn btn btn-xs btn-info video_status" href="javascript:void(0)" data-id="{{$val->id}}">@if($val->status=='1') {{'Disable'}} @else {{'Enable'}} @endif</a>	 
 												
 			                                       <a class="btn btn-xs btn-warning" href="{{ route('admin.languages.edit',[$val->id]) }}">Edit</a> 
 												</td>
@@ -73,7 +74,34 @@
         </div>
 
     </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
 
+    	$(document).ready(function(){
+        	
+            $('.video_status').on('click', function(event){
+            	if(confirm('Are you sure to change the status?')){
+
+                id = $(this).data('id');
+                var $this = $(this);
+                $.ajax({
+                    type: 'POST',
+                    url:"{{ URL::route('admin.languages.changeStatus') }}",
+					data: {
+					        "_token": "{{ csrf_token() }}",
+					        "id": id
+					        },
+                    success: function(data) {
+                    	$this.html(data);
+                        // empty
+                    },
+                });
+            }
+            });
+          
+        });
+
+ 	</script>
     
 @stop	
 

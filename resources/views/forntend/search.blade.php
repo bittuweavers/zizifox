@@ -21,26 +21,17 @@
          @if(isset($_GET['language']))
         @php $lan = $_GET['language'];  @endphp
         @else 
-        @php  $lan = "us";  @endphp
+        @php  $lan = "1";  @endphp
         @endif     
 
          <input name="search" type="search" placeholder="Enter a word" value="{{$seacrh}}" autocomplete="off" maxlength="100" class="s-input js-search-field " required>
         
         <div class="option_box">
           <select data-placeholder="Choose a Language..." id="lan-select" name="language">
-                  @if($language->count()>0)
+                 
                 @foreach($language as $key=>$val)
-                  @php if($val->lang_code=='en'){
-                        $lang='us';
-                        }else{
-                        $lang=$val->lang_code;
-                        } 
-                  @endphp 
-                  <option value="{{$lang}}" <?php if($lan==$lang){ echo "selected"; } ?>>{{$val->lang_name}}</option>
+                  <option value="{{$val->id}}" <?php if($lan==$val->id){ echo "selected"; } ?>>{{$val->lang_name}}</option>
                 @endforeach 
-                @else
-                  <option value="us" <?php if($lan==$lang){ echo "selected"; } ?>>US</option>      
-                @endif 
           </select>
         </div>
       </div>

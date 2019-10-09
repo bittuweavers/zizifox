@@ -87,4 +87,23 @@ public function destroy($id)
 		return redirect()->route('admin.languages')
 						->with('success','User update successfully');
     }
+
+    public function changeStatus(Request $request){
+
+      $id = $request->id;
+      $languages = Language::findOrFail($id);
+     $status = $languages->status ;
+     if($status=='1'){
+      $language_status =0;
+      $text = "Enable";
+     }else{
+      $language_status =1;
+      $text = "Disable";
+     }
+
+     $languages->status =  $language_status;
+      $languages->save();
+      echo $text;
+
+    }
 }

@@ -47,6 +47,7 @@ Route::post('/admin/languages/store', 'Admin\AdminLanguageController@store')->na
 Route::delete('/admin/languages/destroy/{id}', 'Admin\AdminLanguageController@destroy')->name('admin.languages.destroy');
 Route::get('/admin/languages/edit/{id}', 'Admin\AdminLanguageController@edit')->name('admin.languages.edit');
 Route::put('/admin/languages/update/{id}', 'Admin\AdminLanguageController@update')->name('admin.languages.update');
+Route::post('/admin/languages/changeStatus', 'Admin\AdminLanguageController@changeStatus')->name('admin.languages.changeStatus');
 
 
 
@@ -73,6 +74,7 @@ Route::get('/search', 'Forntend\HomeController@search')->name('home.search.video
 Route::get('/ajax-pagination', 'Forntend\HomeController@ajax_pagination')->name('home.ajax.video');
 Route::get('/insertcaption', 'Forntend\HomeController@insert_caption')->name('home.insert.caption');
 Route::get('/filesearch', 'Forntend\FileSearchController@file_search')->name('video.filesearch');
+//Route::get('/update-video-langauagesid', 'Forntend\HomeController@update_video_langauages_id')->name('video.update_video_langauages_id');
 
 
 Route::get('/developer', 'Forntend\ForntendPageController@page_show')->name('page.developer');
